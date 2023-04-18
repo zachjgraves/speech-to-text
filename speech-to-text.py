@@ -3,9 +3,8 @@ from audio_recorder_streamlit import audio_recorder
 import openai
 import numpy as np
 from scipy.io.wavfile import write
-import matplotlib.pyplot as plt
 
-openai.api_key = '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'
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 whisper_model_id = "text-davinci-002"
 
 # Define the transcribe_audio function here...
