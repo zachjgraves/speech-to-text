@@ -1,0 +1,50 @@
+import streamlit as st
+from audio_recorder_streamlit import audio_recorder
+import openai
+import numpy as np
+from scipy.io.wavfile import write
+import matplotlib.pyplot as plt
+
+openai.api_key = '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'
+whisper_model_id = "text-davinci-002"
+
+# Define the transcribe_audio function here...
+def transcribe_audio():
+    audio_file = open("recorded_audio.wav", "rb")
+    transcription = openai.Audio.transcribe(
+        "whisper-1", audio_file
+    )
+    return transcription
+
+# Define analyze_transcription function here...
+def analyze_transcription(transcription):
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are an assistant to retrieve important information from a given message. Each variable should have its own line."},
+            {"role": "user", "content": "Retrieve name, issue, machine number (4 digits) and phone number from the following text: {}".format(transcription.text)}
+            ]
+    )
+    return response
+
+st.title('Speech to Text')
+
+st.subheader("Please describe you issue and provide your name, phone number, and the machine's ID number.")
+
+# Record the audio
+audio_bytes = audio_recorder()
+if audio_bytes:
+    st.audio(audio_bytes, format="audio/wav")
+    
+    with open("recorded_audio.wav", "wb") as f:
+        f.write(audio_bytes)
+    # Output to wave
+
+
+if audio_bytes is not None:
+    transcription = transcribe_audio()
+    transcription_text = transcription.text
+    st.subheader(transcription_text)
+    response = analyze_transcription(transcription)
+    response_text = response.choices[0]["message"].content
+    st.caption(response_text)
