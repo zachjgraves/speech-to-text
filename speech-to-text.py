@@ -21,14 +21,14 @@ def analyze_transcription(transcription):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an assistant to retrieve important information from a given message. Each variable should have its own line."},
-            {"role": "user", "content": "Retrieve name, issue, machine number (4 digits) and phone number from the following text: {}".format(transcription.text)}
+            {"role": "user", "content": "Retrieve name, issue and phone number from the following text: {}".format(transcription.text)}
             ]
     )
     return response
 
 st.title('Speech to Text')
 
-st.subheader("Please describe you issue and provide your name, phone number, and the machine's ID number.")
+st.subheader("Please describe you issue and provide your name, and phone number.")
 
 # Record the audio
 audio_bytes = audio_recorder()
