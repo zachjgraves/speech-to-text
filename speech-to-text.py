@@ -46,4 +46,4 @@ if audio_bytes is not None:
     st.subheader(transcription_text)
     response = analyze_transcription(transcription)
     response_text = response.choices[0]["message"].content
-    st.caption(response_text)
+    st.write(response_text)
