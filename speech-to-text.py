@@ -22,7 +22,8 @@ def analyze_transcription(transcription):
         messages=[
             {"role": "system", "content": "You are an assistant to retrieve important information from a given message. Each variable should have its own line."},
             {"role": "user", "content": "Retrieve name, issue and phone number from the following text: {}".format(transcription.text)}
-            ]
+            ],
+        temperature=0.2
     )
     return response
 
