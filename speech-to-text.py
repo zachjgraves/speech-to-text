@@ -7,7 +7,7 @@ from scipy.io.wavfile import write
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 whisper_model_id = "text-davinci-002"
 
-# Define the transcribe_audio function here...
+# Transcribe audio function
 def transcribe_audio():
     audio_file = open("recorded_audio.wav", "rb")
     transcription = openai.Audio.transcribe(
@@ -15,7 +15,7 @@ def transcribe_audio():
     )
     return transcription
 
-# Define analyze_transcription function here...
+# Analyze transcription function
 def analyze_transcription(transcription):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -26,6 +26,7 @@ def analyze_transcription(transcription):
     )
     return response
 
+# Front End
 st.title('Speech to Text')
 
 st.subheader("Please describe you issue and provide your name, and phone number.")
@@ -34,12 +35,10 @@ st.subheader("Please describe you issue and provide your name, and phone number.
 audio_bytes = audio_recorder()
 if audio_bytes:
     st.audio(audio_bytes, format="audio/wav")
-    
     with open("recorded_audio.wav", "wb") as f:
         f.write(audio_bytes)
-    # Output to wave
 
-
+# Analyze audio
 if audio_bytes is not None:
     transcription = transcribe_audio()
     transcription_text = transcription.text
