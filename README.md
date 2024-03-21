@@ -1,5 +1,7 @@
 ## Replacing the Call Center
 
+https://github.com/zachjgraves/speech-to-text/assets/127673423/351d7389-17e2-4583-ae23-7a99253e8121
+
 ### With a Deep Learning Speech-to-Text Application
 
 This is a Python application that receives a voice message from a caller, transcribe that message to text, then extract pertinent information to auto-fill a help request.
