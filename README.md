@@ -27,3 +27,7 @@ Some consumers prefer to call rather than text, so the company wanted to impleme
 This project was coded in Python and connects to the OpenAI API to access their Large Language Models.
 
 This was a proof of concpept which was then translated to a NodeJS web application.
+
+### Dependencies:
+
+Streamlit, Python, OpenAI
